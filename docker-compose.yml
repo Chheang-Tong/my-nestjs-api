@@ -1,12 +1,27 @@
 version: '3.8'
+
 services:
- dev-db:
-   image: postgres:13
-   environment:
-     POSTGRES_USER: devuser
-     POSTGRES_PASSWORD: devpassword
-     POSTGRES_DB: devdb
-   ports:
-     - 5432:5432
-   volumes:
-     - dev-db-data:/var/lib/postgresql/data
+  dev-db:
+    image: postgres:13
+    # restart: always
+    # container_name: nest-dev-db
+    environment:
+      POSTGRES_USER: devuser
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: nest
+    ports:
+      - '5434:5432'
+    networks:
+      - networkTesting
+networks:
+  networkTesting:
+    # volumes:
+    #   - dev-db-data:/var/lib/postgresql/data
+    # healthcheck:
+    #   test: ["CMD-SHELL", "pg_isready -U devuser -d devdb"]
+    #   interval: 5s
+    #   timeout: 5s
+    #   retries: 5
+
+# volumes:
+#   dev-db-data:
