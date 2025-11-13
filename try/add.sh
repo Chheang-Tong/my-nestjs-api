@@ -10,6 +10,9 @@ npx prisma migrate reset
 npx prisma migrate dev --name init
 # generate client
 npx prisma generate
+# remove generated prisma client
+rm -rf generated/prisma
+
 # open studio
 npx prisma studio
 # check status
@@ -45,3 +48,4 @@ ls prisma
 
 # remove prisma
 rm -rf prisma
+yarn add -D dotenv
