@@ -15,18 +15,28 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  name      String?
- 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  hash  String
+  name  String?
+
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  bookMarks BookMark[]
+
+  @@map("users")
 }
- model BookMark {
-  id        String   @id @default(uuid())
-  url       String
-  title     String?
- 
+
+model BookMark {
+  id    Int     @id @default(autoincrement())
+  url   String
+  title String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
- }
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  @@map("bookmarks")
+}

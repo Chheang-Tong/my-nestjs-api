@@ -49,3 +49,8 @@ ls prisma
 # remove prisma
 rm -rf prisma
 yarn add -D dotenv
+
+# install postgresql@14
+brew install postgresql@14
+# start postgresql@14
+brew services start postgresql@14
