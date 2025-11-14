@@ -4,8 +4,15 @@ import { UserModule } from './user/user.module';
 import { BookmarkModule } from './bookmark/bookmark.module';
 import { NoteModule } from './note/note.module';
 import { MainModule } from './main/main.module';
-
+import { ConfigModule } from '@nestjs/config';
 @Module({
-  imports: [AuthModule, UserModule, BookmarkModule, NoteModule, MainModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    AuthModule,
+    UserModule,
+    BookmarkModule,
+    NoteModule,
+    MainModule,
+  ],
 })
 export class AppModule {}
