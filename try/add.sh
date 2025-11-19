@@ -43,12 +43,18 @@ npx prisma migrate dev --name remove-field
 npx prisma migrate dev --name update-field
 # prisma migrate dev --name rename-field
 npx prisma migrate dev --name rename-field
+# prisma migrate dev --name add_description_to_bookmark
+npx prisma migrate dev --name add_description_to_bookmark
+# prisma migrate reset
+npx prisma migrate reset ###answer "y" to reset DB and re-apply all migrations
+
 # list prisma folder 
 ls prisma
 
 # remove prisma
 rm -rf prisma
 yarn add -D dotenv
+yarn add -D dotenv-cli
 
 # install postgresql@14
 brew install postgresql@14

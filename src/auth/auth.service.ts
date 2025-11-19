@@ -2,12 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { SignupDto } from './dto/signup.dto';
-import { SigninDto } from './dto/signin.dto';
 import * as argon2 from 'argon2';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { SigninDto, SignupDto } from './dto';
 
 @Injectable()
 export class AuthService {
@@ -37,7 +36,7 @@ export class AuthService {
         },
       });
 
-      return user;
+      return this.signToken(user.id, user.email, user.name!);
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
@@ -76,7 +75,7 @@ export class AuthService {
     name: string,
   ): Promise<{ access_token: string; email: string; name: string }> {
     const payload = {
-      sub: userId,
+      id: userId,
       email,
     };
     const secret = this.config.get('JWT_SECRET');
