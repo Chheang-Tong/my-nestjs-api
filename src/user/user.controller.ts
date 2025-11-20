@@ -1,5 +1,4 @@
 import { Body, Controller, Get, Patch, UseGuards } from '@nestjs/common';
-import * as client from '@prisma/client';
 import { GetUser } from '../auth/decorator';
 import { JwtGuard } from '../auth/guard';
 import { EditUserDto } from './dto';
@@ -12,13 +11,12 @@ export class UserController {
   getMe() {
     return 'This will return the current user';
   }
+
   @UseGuards(JwtGuard)
   @Get('me')
-  getCurrentUser(
-    @GetUser() user: client.User,
-    @GetUser('email') email: string,
-  ) {
+  getCurrentUser(@GetUser() user: any, @GetUser('email') email: string) {
     console.log(email);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return user;
   }
   @UseGuards(JwtGuard)
